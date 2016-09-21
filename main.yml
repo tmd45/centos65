@@ -2,7 +2,7 @@
 - hosts: localhost
   become: yes
   vars:
-    - ruby_version: 2.2.2
+    - ruby_version: 2.3.1
   tasks:
     - name: yum update
       yum: name=* state=latest
