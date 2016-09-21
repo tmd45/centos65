@@ -51,12 +51,16 @@
       copy: src=php.ini.custom dest=/etc/php.ini backup=yes
       notify:
         - restart apache
+
+    - name: install mysql57 repository
+      command: rpm -ih http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm creates=/etc/yum.repos.d/mysql-community.repo
     - name: install mysql
       yum: name=mysql-server enablerepo=remi,epel state=present
     - name: copy my.cnf.custom
       copy: src=my.cnf.custom dest=/etc/my.cnf backup=yes
     - name: start mysql and enabled
       service: name=mysqld state=started enabled=yes
+
     - name: install ruby dependencies
       yum: name={{item}} enablerepo=remi,epel state=present
       with_items:
